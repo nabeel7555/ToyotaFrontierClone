@@ -1,13 +1,79 @@
-body {
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.main {
+  position: relative; /* Necessary for positioning child elements */
+  width: 100%;
+  height: 100vh;
+  overflow: hidden; /* Prevent overflow */
+}
+
+video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute; /* Ensure video is positioned absolutely */
+  top: 0;
+  left: 0;
+  z-index: 1; /* Set lower z-index than overlay */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent overlay */
+  z-index: 2; /* Ensure overlay is above video */
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 100; /* Higher than the video and content */
+  background-color: rgba(0, 0, 0, 0.2); /* Initially transparent */
+  transition: background-color 0.3s ease;
+}
+
+.navbar-scrolled {
+  background-color: white; /* Changes to white on scroll */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for depth */
+}
+
+
+.navbar-scrolled .text-white {
+  color: black !important; /* Change text color on scroll */
+}
+
+.heading{
+  transition: 0.5s;
+}
+.heading:hover{
+  -webkit-text-stroke: 2px #fff;
+  color: transparent;
+}
+
+
+@media (min-aspect-ratio:16/9) {
+  video{
+    width: 100%;
+    height: 100%;
+  }
+}
+@media (max-aspect-ratio:16/9) {
+  video{
+    width: auto;
+    height: 100%;
+  }
 }
